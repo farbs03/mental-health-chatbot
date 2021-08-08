@@ -115,7 +115,7 @@ const App = () => {
         
         <div style={{maxWidth: "500px", margin: "20px auto"}}>
 
-          <div style={{height: "400px", borderRadius: "5px", border:"1px solid #ccc", padding: "10px", overflowY: "auto"}}>
+          <div style={{height: "400px", borderRadius: "5px", border:"1px solid #ccc", padding: "10px", overflowY: "auto", overflowX: "hidden"}}>
               <Messages />
           </div>
 
