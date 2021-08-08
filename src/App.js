@@ -147,7 +147,18 @@ const App = () => {
 
       <div className="App" style={{padding: "10px"}}>
 
-        <Paper style={{maxWidth: "500px", margin: "0px auto 20px auto", borderRadius: "20px"}} elevation={6}>
+        <Paper 
+          style={{
+            width: "350px",
+            height: "556px",
+            borderRadius: "20px",
+            position: "absolute",
+            top: "50%",
+            left:"50%",
+            transform: "translate(-50%, -50%)"
+          }} 
+          elevation={6}
+        >
           <div style={{borderBottom: "1px solid #ccc"}}>
             <StyledBadge
               overlap="circular"
