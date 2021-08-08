@@ -9,10 +9,14 @@ import {
   Input,
   OutlinedInput,
   InputAdornment,
-  FormControl
+  FormControl,
+  Paper,
+  InputBase,
+  Avatar,
+  Badge
 } from "@material-ui/core"
 
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme, withStyles } from '@material-ui/core/styles';
 
 import {blue} from "@material-ui/core/colors"
 
@@ -21,7 +25,38 @@ import { AccountCircle } from "@material-ui/icons";
 
 import { motion } from "framer-motion";
 
+import ChatbotLogo from "./chatbot.png"
+
 localStorage.setItem("messages", JSON.stringify([]))
+
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    backgroundColor: '#44b700',
+    color: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: '$ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}))(Badge);
 
 const Messages = () => {
   var currMessages = JSON.parse(localStorage.getItem('messages'))
@@ -111,24 +146,40 @@ const App = () => {
     <ThemeProvider theme={theme}>
 
       <div className="App" style={{padding: "10px"}}>
-        <Typography variant="h3" style={{textAlign: "center", fontSize: "25px", fontWeight: "bold"}}>Mental Health Chatbot</Typography>
-        
-        <div style={{maxWidth: "500px", margin: "20px auto"}}>
 
-          <div style={{height: "400px", borderRadius: "5px", border:"1px solid #ccc", padding: "10px", overflowY: "auto", overflowX: "hidden"}}>
+        <Paper style={{maxWidth: "500px", margin: "0px auto 20px auto", borderRadius: "20px"}} elevation={6}>
+          <div style={{borderBottom: "1px solid #ccc"}}>
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              variant="dot"
+              style={{display: "inline-block", borderRadius: "50%", marginLeft: "5px", background: "rgb(240, 240, 240)"}}
+            >
+              <Avatar alt="Chatbot" src={ChatbotLogo} />
+            </StyledBadge>
+            <Typography variant="h3" style={{ fontSize: "18px", fontWeight: "bold", padding: "10px", display: "inline-block", lineHeight: "40px"}}>Mental Health Chatbot</Typography>
+          </div>
+
+          <div style={{height: "400px", overflowY: "auto", overflowX: "hidden", padding: '10px'}}>
               <Messages />
           </div>
 
           <br></br>
 
-          <div>
+          <div style={{borderTop:"1px solid #ccc"}}>
 
             <FormControl variant="outlined" fullWidth>
-              <OutlinedInput
+              <InputBase
                 value={message}
                 onChange={(e) => (setMessage(e.target.value))}
                 placeholder="Send a message"
                 fullWidth
+                style={{
+                  padding: "12px"
+                }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -144,7 +195,7 @@ const App = () => {
             </FormControl>
           </div>
 
-        </div>
+        </Paper>
 
       </div>
 
