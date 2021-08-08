@@ -110,12 +110,12 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
 
-      <div className="App">
+      <div className="App" style={{padding: "10px"}}>
         <Typography variant="h3" style={{textAlign: "center", fontSize: "25px", fontWeight: "bold"}}>Mental Health Chatbot</Typography>
         
         <div style={{maxWidth: "500px", margin: "20px auto"}}>
 
-          <div style={{height: "600px", borderRadius: "5px", border:"1px solid #ccc", padding: "10px", overflowY: "auto"}}>
+          <div style={{maxHeight: "600px", borderRadius: "5px", border:"1px solid #ccc", padding: "10px", overflowY: "auto"}}>
               <Messages />
           </div>
 
