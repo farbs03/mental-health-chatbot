@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect, useRef} from "react"
 
 import {
   Typography,
@@ -64,7 +64,7 @@ const Messages = () => {
     <div>
       {currMessages.map((message, index) => (
         <>
-          {message["type"] === "user" ?
+          {index % 2 === 0 ?
             (
               <>
                 <motion.div
@@ -140,7 +140,16 @@ const App = () => {
     }
   }
   
-  
+  const messageEl = useRef(null);
+
+  useEffect(() => {
+    if (messageEl) {
+      messageEl.current.addEventListener('DOMNodeInserted', event => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+      });
+    }
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -174,7 +183,7 @@ const App = () => {
             <Typography variant="h3" style={{ fontSize: "18px", fontWeight: "bold", padding: "10px", display: "inline-block", lineHeight: "40px"}}>Mental Health Chatbot</Typography>
           </div>
 
-          <div style={{height: "400px", overflowY: "auto", overflowX: "hidden", padding: '10px'}}>
+          <div ref={messageEl} style={{height: "400px", overflowY: "auto", overflowX: "hidden", padding: '10px'}}>
               <Messages />
           </div>
 
