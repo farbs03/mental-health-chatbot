@@ -82,6 +82,7 @@ const Messages = () => {
                     color: 'white'
                   }}
                   id={index}
+                  key={index}
                 >
                   <Typography>{message['text']}</Typography>
                 </motion.div>
@@ -104,6 +105,8 @@ const Messages = () => {
                   background: "#ccc", 
                   color: 'black'
                 }}
+                id={index}
+                key={index}
               >
                 <Typography>{message['text']}</Typography>
               </motion.div>
@@ -169,6 +172,14 @@ const App = () => {
     }
   }, [])
 
+  const handleKeypress = (e) => {
+      //it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      sendMessage();
+      console.log('sent')
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
 
@@ -198,29 +209,32 @@ const App = () => {
           <br></br>
 
           <div style={{borderTop:"1px solid #ccc"}}>
-
-            <FormControl variant="outlined" fullWidth>
-              <InputBase
-                value={message}
-                onChange={(e) => (setMessage(e.target.value))}
-                placeholder="Send a message"
-                fullWidth
-                style={{
-                  padding: "12px"
-                }}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={sendMessage}
-                      edge="end"
-                      color="primary"
-                    >
-                      <SendIcon />
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
+            <form onSubmit={sendMessage}>
+              <FormControl variant="outlined" fullWidth>
+                <InputBase
+                  value={message}
+                  onChange={(e) => (setMessage(e.target.value))}
+                  placeholder="Send a message"
+                  fullWidth
+                  onKeyPress={handleKeypress}
+                  style={{
+                    padding: "12px"
+                  }}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        type='submit'
+                        onClick={sendMessage}
+                        edge="end"
+                        color="primary"
+                      >
+                        <SendIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </form>
           </div>
 
         </Paper>
