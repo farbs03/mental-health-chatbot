@@ -86,6 +86,7 @@ const Messages = () => {
                   <Typography>{message['text']}</Typography>
                 </motion.div>
                 <br></br>
+                <br></br>
               </>
             )
             :
@@ -107,12 +108,29 @@ const Messages = () => {
                 <Typography>{message['text']}</Typography>
               </motion.div>
               <br></br>
+              <br></br>
             </>
           }
         </>
         
       ))}
     </div>
+  )
+}
+
+const ChatbotAvatar = () => {
+  return (
+    <StyledBadge
+      overlap="circular"
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      variant="dot"
+      style={{display: "inline-block", borderRadius: "50%", marginLeft: "5px", background: "rgb(240, 240, 240)"}}
+    >
+      <Avatar alt="Chatbot" src={ChatbotLogo} />
+    </StyledBadge>
   )
 }
 
@@ -169,17 +187,7 @@ const App = () => {
           elevation={6}
         >
           <div style={{borderBottom: "1px solid #ccc"}}>
-            <StyledBadge
-              overlap="circular"
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              variant="dot"
-              style={{display: "inline-block", borderRadius: "50%", marginLeft: "5px", background: "rgb(240, 240, 240)"}}
-            >
-              <Avatar alt="Chatbot" src={ChatbotLogo} />
-            </StyledBadge>
+            <ChatbotAvatar />
             <Typography variant="h3" style={{ fontSize: "18px", fontWeight: "bold", padding: "10px", display: "inline-block", lineHeight: "40px"}}>Mental Health Chatbot</Typography>
           </div>
 
